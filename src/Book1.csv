@@ -1,0 +1,216 @@
+MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood,Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd,RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond,Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF,Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea,BsmtFullBath,BsmtHalfBath,FullBath,HalfBath,Bedroom,Kitchen,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu,basement,GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF,OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition,unit
+Identifies the type of dwelling involved in the sale.,Identifies the general zoning classification of the sale,Linear feet of street connected to property,Lot size in square feet,Type of road access to property,Type of alley access to property,General shape of property,Flatness of the property,Type of utilities available,Lot configuration,Slope of property,Physical locations within Ames city limits,Proximity to various conditions,Proximity to various conditions (if more than one is present),Type of dwelling,Style of dwelling,Rates the overall material and finish of the house,Rates the overall condition of the house,Original construction date,Remodel date (same as construction date if no remodeling or additions),Type of roof,Roof material,Exterior covering on house,Exterior covering on house (if more than one material),Masonry veneer type,Masonry veneer area in square feet,Evaluates the quality of the material on the exterior,Evaluates the present condition of the material on the exterior,Type of foundation,Evaluates the height of the basement,Evaluates the general condition of the basement,Refers to walkout or garden level walls,Rating of basement finished area,Type 1 finished square feet,Rating of basement finished area (if multiple types),Type 2 finished square feet,Unfinished square feet of basement area,Total square feet of basement area,Type of heating,Heating quality and condition,Central air conditioning,Electrical system,First Floor square feet,Second floor square feet,Low quality finished square feet (all floors),Above grade (ground) living area square feet,Basement full bathrooms,Basement half bathrooms,Full bathrooms above grade,Half baths above grade,Bedrooms above grade (does NOT include basement bedrooms),Kitchens above grade,Kitchen quality,Total rooms above grade (does not include bathrooms),Home functionality (Assume typical unless deductions are warranted),Number of fireplaces,Fireplace quality,basement,Garage location,Year garage was built,Interior finish of the garage,Size of garage in car capacity,Size of garage in square feet,Garage quality,Garage condition,Paved driveway,Wood deck area in square feet,Open porch area in square feet,Enclosed porch area in square feet,Three season porch area in square feet,Screen porch area in square feet,Pool area in square feet,Pool quality,Fence quality,Miscellaneous feature not covered in other categories,$Value of miscellaneous feature,Month Sold (MM),Year Sold (YYYY),Type of sale,Condition of sale,
+"20 1?\STORY 1946 & NEWER ALL STYLES 
+30 1?\STORY 1945 & OLDER 
+40 1?\STORY W/FINISHED ATTIC ALL AGES 
+45 1?\1/2 STORY ?\ UNFINISHED ALL AGES 
+50 1?\1/2 STORY FINISHED ALL AGES
+60 2?\STORY 1946 & NEWER
+70 2?\STORY 1945 & OLDER
+75 2?\1/2 STORY ALL AGES
+80 SPLIT OR MULTI?\LEVEL
+85 SPLIT FOYER
+90 DUPLEX ?\ ALL STYLES AND AGES
+120 1?\STORY PUD (Planned Unit Development) ?\ 1946 & NEWER
+150 1?\1/2 STORY PUD ?\ ALL AGES
+160 2?\STORY PUD ?\ 1946 & NEWER
+180 PUD ?\ MULTILEVEL ?\ INCL SPLIT LEV/FOYER
+190 2 FAMILY CONVERSION ?\ ALL STYLES AND AGES","A Agriculture
+C Commercial
+FV Floating Village Residential
+I Industrial
+RH Residential High Density
+RL Residential Low Density
+RP Residential Low Density Park
+RM Residential Medium Density",,,,,"Reg Regular
+IR1 Slightly irregular
+IR2 Moderately Irregular
+IR3 Irregular","Lvl Near Flat/Level
+Bnk Banked ©\ Quick and significant rise from street grade to building
+HLS Hillside ©\ Significant slope from side to side
+Low Depression","AllPub All public Utilities (E,G,W,& S)
+NoSewr Electricity, Gas, and Water (Septic Tank)
+NoSeWa Electricity and Gas Only",Inside Inside lot,"Gtl Gentle slope
+Mod Moderate Slope
+Sev Severe Slope","Blmngtn Bloomington Heights
+Blueste Bluestem
+BrDale Briardale
+BrkSide Brookside
+ClearCr Clear Creek
+CollgCr College Creek
+Crawfor Crawford
+Edwards Edwards
+Gilbert Gilbert
+IDOTRR Iowa DOT and Rail Road
+MeadowV Meadow Village
+Mitchel Mitchell
+Names North Ames
+NoRidge Northridge
+NPkVill Northpark Villa
+NridgHt Northridge Heights
+NWAmes Northwest Ames
+OldTown Old Town
+SWISU South & West of Iowa State University
+Sawyer Sawyer
+SawyerW Sawyer West
+Somerst Somerset
+StoneBr Stone Brook
+Timber Timberland
+Veenker Veenker","Artery Adjacent to arterial street
+Feedr Adjacent to feeder street
+Norm Normal
+RRNn Within 200' of North©\South Railroad
+RRAn Adjacent to North©\South Railroad
+PosN Near positive off©\site feature©\©\park, greenbelt, etc.
+PosA Adjacent to postive off©\site feature
+RRNe Within 200' of East©\West Railroad
+RRAe Adjacent to East©\West Railroad","Artery Adjacent to arterial street
+Feedr Adjacent to feeder street
+Norm Normal
+RRNn Within 200' of North©\South Railroad
+RRAn Adjacent to North©\South Railroad
+PosN Near positive off©\site feature©\©\park, greenbelt, etc.
+PosA Adjacent to postive off©\site feature
+RRNe Within 200' of East©\West Railroad
+RRAe Adjacent to East©\West Railroad","1Fam Single©\family Detached
+2FmCon Two©\family Conversion; originally built as one©\family dwelling
+Duplx Duplex
+TwnhsE Townhouse End Unit
+TwnhsI Townhouse Inside Unit",1Story One story,10 Very Excellent,"10 Very Excellent
+9 Excellent
+8 Very Good
+7 Good
+6 Above Average
+5 Average
+4 Below Average
+3 Fair
+2 Poor
+1 Very Poor",,,"Flat Flat
+Gable Gable
+Gambrel Gabrel (Barn)
+Hip Hip
+Mansard Mansard
+Shed Shed",ClyTile Clay or Tile,AsbShng Asbestos Shingles,AsbShng Asbestos Shingles,BrkCmn Brick Common,,Ex Excellent,Ex Excellent,"BrkTil Brick & Tile
+CBlock Cinder Block
+PConc Poured Contrete
+Slab Slab
+Stone Stone
+Wood Wood","Ex Excellent (100+ inches)
+Gd Good (90©\99 inches)
+TA Typical (80©\89 inches)
+Fa Fair (70©\79 inches)
+Po Poor (<70 inches
+NA No Basement","Ex Excellent
+Gd Good
+TA Typical ©\ slight dampness allowed
+Fa Fair ©\ dampness or some cracking or settling
+Po Poor ©\ Severe cracking, settling, or wetness
+NA No Basement","Gd Good Exposure
+Av Average Exposure (split levels or foyers typically score average or above)
+Mn Mimimum Exposure
+No No Exposure
+NA No Basement","GLQ Good Living Quarters
+ALQ Average Living Quarters
+BLQ Below Average Living Quarters
+Rec Average Rec Room
+LwQ Low Quality
+Unf Unfinshed
+NA No Basement",,"GLQ Good Living Quarters
+ALQ Average Living Quarters
+BLQ Below Average Living Quarters
+Rec Average Rec Room
+LwQ Low Quality
+Unf Unfinshed
+NA No Basement",,,,"Floor Floor Furnace
+GasA Gas forced warm air furnace
+GasW Gas hot water or steam heat
+Grav Gravity furnace
+OthW Hot water or steam heat other than gas
+Wall Wall furnace","Ex Excellent
+Gd Good
+TA Average/Typical
+Fa Fair
+Po Poor","N No
+Y Yes","SBrkr Standard Circuit Breakers & Romex
+FuseA Fuse Box over 60 AMP and all Romex wiring (Average)
+FuseF 60 AMP Fuse Box and mostly Romex wiring (Fair)
+FuseP 60 AMP Fuse Box and mostly knob & tube wiring (poor)
+Mix Mixed",,,,,,,,,,,"Ex Excellent
+Gd Good
+TA Typical/Average
+Fa Fair
+Po Poor",,"Typ Typical Functionality
+Min1 Minor Deductions 1
+Min2 Minor Deductions 2
+Mod Moderate Deductions
+Maj1 Major Deductions 1
+Maj2 Major Deductions 2
+Sev Severely Damaged
+Sal Salvage only",,"Ex Excellent ©\ Exceptional Masonry Fireplace
+Gd Good ©\ Masonry Fireplace in main level
+TA Average ©\ Prefabricated Fireplace in main living area or Masonry Fireplace in","Fa Fair ©\ Prefabricated Fireplace in basement
+Po Poor ©\ Ben Franklin Stove
+NA No Fireplace","2Types More than one type of garage
+Attchd Attached to home
+Basment Basement Garage
+BuiltIn Built©\In (Garage part of house ©\ typically has room above garage)
+CarPort Car Port
+Detchd Detached from home
+NA No Garage",,"Fin Finished
+RFn Rough Finished
+Unf Unfinished
+NA No Garage",,,"Ex Excellent
+Gd Good
+TA Typical/Average
+Fa Fair
+Po Poor
+NA No Garage","Ex Excellent
+Gd Good
+TA Typical/Average
+Fa Fair
+Po Poor
+NA No Garage","Y Paved
+P Partial Pavement
+N Dirt/Gravel",,,,,,,"Ex Excellent
+Gd Good
+TA Average/Typical
+Fa Fair
+NA No Pool","GdPrv Good Privacy
+MnPrv Minimum Privacy
+GdWo Good Wood
+MnWw Minimum Wood/Wire
+NA No Fence","Elev Elevator
+Gar2 2nd Garage (if not described in garage section)
+Othr Other
+Shed Shed (over 100 SF)
+TenC Tennis Court
+NA None",,,,"WD Warranty Deed ©\ Conventional
+CWD Warranty Deed ©\ Cash
+VWD Warranty Deed ©\ VA Loan
+New Home just constructed and sold
+COD Court Officer Deed/Estate
+Con Contract 15% Down payment regular terms
+ConLw Contract Low Down payment and low interest
+ConLI Contract Low Interest
+ConLD Contract Low Down
+Oth Other","Normal Normal Sale
+Abnorml Abnormal Sale ©\ trade, foreclosure, short sale
+AdjLand Adjoining Land Purchase
+Alloca Allocation ©\ two linked properties with separate deeds, typically condo with a garage","Family Sale between family members
+Partial Home was not completed when last assessed (associated with New Homes)"
+,,,,,,,,ELO Electricity only,Corner Corner lot,,,,,,1.5Fin One and one©\half story: 2nd level finished,9 Excellent,,,,,CompShg Standard (Composite) Shingle,AsphShn Asphalt Shingles,AsphShn Asphalt Shingles,BrkFace Brick Face,,Gd Good,Gd Good,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,CulDSac Cul©\de©\sac,,,,,,1.5Unf One and one©\half story: 2nd level unfinished,8 Very Good,,,,,Membran Membrane,BrkComm Brick Common,BrkComm Brick Common,CBlock Cinder Block,,TA Average/Typical,TA Average/Typical,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,FR2 Frontage on 2 sides of property,,,,,,2Story Two story,7 Good,,,,,Metal Metal,BrkFace Brick Face,BrkFace Brick Face,None None,,Fa Fair,Fa Fair,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,FR3 Frontage on 3 sides of property,,,,,,2.5Fin Two and one©\half story: 2nd level finished,6 Above Average,,,,,Roll Roll,CBlock Cinder Block,CBlock Cinder Block,Stone Stone,,Po Poor,Po Poor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,2.5Unf Two and one©\half story: 2nd level unfinished,5 Average,,,,,Tar&Grv Gravel & Tar,CemntBd Cement Board,CemntBd Cement Board,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,SFoyer Split Foyer,4 Below Average,,,,,WdShake Wood Shakes,HdBoard Hard Board,HdBoard Hard Board,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,SLvl Split Level,3 Fair,,,,,WdShngl Wood Shingles,ImStucc Imitation Stucco,ImStucc Imitation Stucco,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,2 Poor,,,,,,MetalSd Metal Siding,MetalSd Metal Siding,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,1 Very Poor,,,,,,Other Other,Other Other,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,Plywood Plywood,Plywood Plywood,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,PreCast PreCast,PreCast PreCast,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,Stone Stone,Stone Stone,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,Stucco Stucco,Stucco Stucco,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,VinylSd Vinyl Siding,VinylSd Vinyl Siding,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,Wd Sdng Wood Siding,Wd Sdng Wood Siding,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,WdShing Wood Shingles,WdShing Wood Shingles,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

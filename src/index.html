@@ -1,0 +1,918 @@
+<!DOCTYPE = html>
+<html lang = "en">
+<head>
+  <title> Davisualization project </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="https://dc-js.github.io/dc.js/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://dc-js.github.io/dc.js/css/dc.css" />
+  <script src="https://dc-js.github.io/dc.js/js/d3.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
+  <script src="https://rawgit.com/crossfilter/reductio/master/reductio.js"></script>
+  <script src="https://npmcdn.com/universe@latest/universe.js"></script>
+  <script src="https://www.lactame.com/lib/ml/2.0.0/ml.min.js"></script>
+  <script src="d3.legend.js"></script>
+
+  <style>.dc-chart g.row text {fill: black;}
+	body{   
+		font: 12px sans-serif;
+		color: white;
+		background-image:linear-gradient(to right, gray 0%,white 100%), url("image1.jpg");
+		background-size: 100% 100%;	
+			 
+	}
+	
+		
+    path{stroke: steelblue;
+		 stroke-width: 2;
+		 fill: blue;
+    }
+	
+	.axis path,
+    .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+	
+	p{
+	font: 14px sans-serif;
+	color: black;
+	}
+	
+	#sec {
+      width: 30%;
+      height:60px;
+	  margin: 1%;
+      float:left;
+      font-size: 10px;
+    }
+		
+	#ch1{width:960px;
+		 height:160px;
+		 margin: 1%;
+		 padding:1%;
+		 border:0;
+		 text-align:center;
+		 background-color:grey;
+		 opacity: 0.9;
+		
+    }
+	
+	#ch_His{
+		 width:460px;
+		 height:350px;
+		 margin: 1%;
+		 padding:1%;
+		 border:0;
+		 align:center;
+		 background-color: white;
+		 float:left;
+		 opacity: 0.95; 
+	
+	}
+		
+	#ch_Box{ 
+		width:960px;
+		height:550px;
+		margin: 1%;
+		padding:1%;
+		border:0;
+		align:center;
+		float:left;
+		background-color: white;
+		opacity: 0.95;
+    }
+	
+	#ch_Scatter{
+		width:460px;
+		height:350px;
+		margin: 1%;
+		padding:1%;
+		border:0;
+		align:center;		
+		background-color: white;
+		float:right;
+		opacity: 0.95;
+    }
+	
+	#ch_cirBar{
+		width:960px;
+		height:600px;
+		margin: 1%;
+		padding:1%;
+		border:0;
+		align:center;
+		float:right;
+		background-color: white;
+		opacity: 0.9;
+    }
+	
+	#ch_ML{
+	  width:960px;
+		height:500px;
+		margin: 1%;
+		padding:1%;
+		border:0;
+		align:center;
+		float:right;
+		background-color: white;
+		opacity: 0.9;
+	}
+
+	
+	h1{
+		
+		color:crimson;
+    }
+	
+	h2{
+      align:center;
+      color:crimson;
+	  margin: 0;
+    }
+	
+	h3{
+		align: center;
+		color: black;
+		margin: 0;
+	}
+	
+	h4{align: center;
+		color: orange;
+		margin: 0;
+	
+	}
+	h5{
+		align: center;
+		color: black;
+		margin: 0;
+	}
+	
+	
+	.p1{
+	    
+        width: 25em;
+        font-size: 12px;
+        overflow: visible;
+		color: red;
+		
+	}
+	
+	#step_instr{
+	     width:960px;
+		 height:100px;
+		 margin: 1%;
+		 padding:1%;
+		 border:0;
+		 text-align:left;
+		 background-color:beige;
+		 float:left;
+		 opacity: 0.9; 
+         	 
+    }
+
+	
+	
+	.dropdown {
+      border: 1px solid #ccc;
+      width: 8em;
+      font-size: 10px;
+      border-radius: 3px;
+      overflow: visible;
+    }
+	.legend {
+        fill:white;
+		font-family: sans-serif;
+		font-size: 11px;
+        stroke:black;
+        opacity:1;}	
+	
+  </style>
+</head> 
+
+<body>
+
+  <div class = "container" style= "width:1000" >
+	<div id = "ch1"  >
+	  <h1 style="h1"> Housing Price Analysis and Prediction</h1>
+	    <p style = "color: white">This is a brief tutorial of applying machine learning on housing price analysis and prediction.<br>
+		The dataset describes the sale of individual residential property in Ames, Iowa from 2006 to 2010.<br>
+		The data set contains 1460 observations and a large number of explanatory variables (total 79 features <br>
+		including 55 categorical and 24 numerical ones involved in asessing home values.  More details can be <br>
+		found through the following link:
+		</p>
+		<p><a href ="https://www.kaggle.com/c/house-prices-advanced-regression-techniques#description">Data source</a>&nbsp &nbsp
+		   <a href = "data_description.pdf">Data Description</a>
+		
+		</p>
+	</div>
+	<div id ="step_instr" style = "height: 130">
+	  <h3 > Step1: Interactive Data exploration </h3>
+	  <p> Raw data are preprocessed	by deleting sparse features. Missing data are filled with "median" for numeric values, and "ZZ" for categorical values.
+    	  The following are plots with raw data: Scatter-plot are for numeric variables, box-plot are for categorical variables. Please try playing with 
+		  the data by selecting variable from dropdown menu, brushing bar-chart, selecting area from scattering -  plot and probing the box plot . 
+		  Check if any relation between selected variable with saleprice.
+	  </p>
+	  <p><a href = "process_visual.py"> Python code of Processing data for visualization  </a></p>
+	</div>
+	
+	<div id = "ch_His">
+	  <div>
+	  <h3 style = "h3">Sale Price distribution
+			<a class="reset" style = "font-size: 12px"
+		     href="javascript:histChart.filterAll();dc.redrawAll();">
+		     reset 
+		    </a>
+	  </h3>  
+	  </div>
+	  <div id = "sec">
+	    <h5>Bin Width</h5>
+		<select id = "opt4" name = "BinWidth" class = "dropdown" onchange = "draw_graphs()" >
+		  <option value="5000">5k</option>
+          <option value="10000">10k</option>
+          <option value="20000">20k</option>
+          <option value="100000">100k</option>
+		</select>
+		<p id = "disopt4"></p>
+      </div>
+	  <div id = "his"></div>
+	</div>
+	<div id = "ch_Scatter">
+	  <div>
+	    <h3 style = "h3"> Scatter-Plot
+		  <a class = "reset" style = "font-size: 12px"
+		     href = "javascript:scatterplot.filterAll(); dc.redrawAll();" >
+			 reset
+		  </a>
+		</h3>
+	  </div>
+	  <div id = "sec">
+	    <h5>Num. Var</h5>
+		<select id = "opt3" name = "numericVar" class = "dropdown" onchange = "draw_graphs()"></select>
+      </div>
+	  <div id = "sec">
+	    <h5>Var. Description</h5>
+		<h5 id = "disopt3" class = "p1"></h5>
+	  </div>
+	  <div id = "scatter"></div> 
+    </div>
+	<div id = "ch_Box">
+	  <div>
+	    <h3 style = "h3">Box-plot
+		  <a class="reset" style = "font-size: 12px"
+		     href="javascript:boxchart.filterAll();dc.redrawAll();">
+		     reset
+		  </a>  
+		</h3>
+	  </div>
+	  <div id = "sec">
+		  <h5>Categ. Var</h5> 
+		  <select id="opt1" name="categVar1"  class="dropdown" onchange="draw_graphs()"></select>
+	  </div>
+	  <div id = "sec">
+	    <h5>Var. Description</h5>
+	    <h5 id = "disopt1" class = "p1"></h5>
+	  </div>
+	  
+	  <div id = "box"></div>  
+	</div>
+	<div id ="step_instr">
+	  <h3> Step2: Data preprocessing and Feature Selection </h3>
+	  <p> The Data processed through step 1 are further processed for machine learning: categorical data are encoded into discrete numeric values. 
+	      More details please checking following reference python code. Features are ranked through their statistical "F-score", and displayed in the following chart.
+		  Notice that most of them have score close to zero, we are going to select top 25 of them for step 3 machine learning.<br>
+	      <a href = "preprocessing.py">Preprocessing Python Code </a> &nbsp &nbsp
+		  <a href = "Housing-Prediction.py">Machine learning Code</a> 
+	  </p>	
+	</div>
+	<div id = "ch_cirBar">
+	  <div>
+	    <h3 style = "h3"> Feature Importance
+		  <a class = "reset" style = "font-size: 12px"
+		     href = "javascript:draw_featureSelection();" >
+			 replay
+		  </a>
+		</h3>
+	  </div>
+	  <div id = "circlebar"></div> 
+	</div>
+    <div id ="step_instr" style= "height: 150">
+	  <h3> Step3: Machine Learning </h3>
+	  <p> Data are split into train and test sets with 2:1 ratio. Three regression methods are applied to train the data,select model through cross-validatios
+	      and give prediction on test data. The black dots in the following scattering-plot are ground-truth data, others are predictions. Please click the 
+	      corresponding button to comparing different predictions. (click to show, click again to remove)<br>
+		  R^2 score: SVR-with 25 top ranked features 74%; Ridge-with 25 top ranked features 83%; Random Forest-with all features 84%<br>
+		  Random Forest is time-consuming and complicated ensemble method, although more accurate in general. With Feature selection, much simple model Ridge could 
+		  achieve comparable results while requiring much less computation resources.<br>
+		  <a href = "Housing-Prediction.py">Machine learning Code same as in step 2</a>
+      </p>
+	</div>
+	<div id = "ch_ML">
+	  <div>
+	    <h3 style = "h3"> Machine Learning Predictions</h3>	
+	  </div>
+	  <div>
+	    <input name="updateButton" 
+           type="button" 
+           value="Ridge" 
+           onclick="updateData_Ridge()" />   
+		<input name="updateButton" 
+           type="button" 
+           value="SupportVector" 
+           onclick="updateData_SVR()" />
+		 <input name="updateButton" 
+           type="button" 
+           value="RandomForest" 
+           onclick="updateData_RF()" />
+	  </div>
+	  <div id = "ML_chart"></div>    
+	</div>
+	<div id ="step_instr" style= "height: 50">
+	  <h4> Other References </h4>
+	  <p> <a href = "https://bl.ocks.org/bricedev/8aaef92e64007f882267">Radio Bar Chart</a>&nbsp &nbsp
+	      <a href = "https://dc-js.github.io/dc.js/examples/box-plot.html"> Box plot</a><br>
+	      This website is specifically designed for CS 590 Data visualization final project. Sincere thanks to Professor Georges Grinstein.
+	  </p>
+	</div>
+</div>
+	
+    
+  
+  
+  <body>
+    <script type = "text/javascript">
+		
+	//all chart definition	
+	
+	var histChart  = dc.barChart("#his");
+	var boxchart = dc.boxPlot("#box");
+	var scatterplot = dc.scatterPlot("#scatter");
+			
+	var num_fea = ['3SsnPorch', 'OpenPorchSF', '2ndFlrSF', 'LotArea', 'SalePrice', 'GrLivArea', 'WoodDeckSF', 'MasVnrArea', '1stFlrSF', 'EnclosedPorch', 'LotFrontage', 'MiscVal', 'YearRemodAdd', 'MoSold', 'TotalBsmtSF', 'BsmtUnfSF', 'GarageYrBlt', 'YrSold', 'YearBuilt', 'BsmtFinSF1', 'BsmtFinSF2', 'PoolArea', 'ScreenPorch', 'LowQualFinSF', 'GarageArea'];
+	var cat_fea = ['MSSubClass', 'MSZoning', 'Street', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle', 'OverallQual', 'OverallCond', 'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType', 'ExterQual', 'ExterCond', 'Foundation', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 'CentralAir', 'Electrical', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'KitchenQual', 'TotRmsAbvGrd', 'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType', 'GarageFinish', 'GarageCars', 'GarageQual', 'GarageCond', 'PavedDrive', 'SaleType', 'SaleCondition'];
+	
+	
+	//draw graph
+	function draw_graphs(){
+	  
+	  d3.csv("hdataforVisua.csv", 
+		function(d,i){
+			namelist=Object.keys(d);
+			return d;
+		},		
+		
+		function(error, dataset) {
+			dataset.forEach(function(d) {
+			for ( j =0; j< num_fea.length;j++){
+				d[num_fea[j]]=+d[num_fea[j]];
+			};
+
+			});
+	    
+		var opt1 = d3.select("#opt1").selectAll("option")
+					.data(cat_fea);
+			opt1.exit().remove();				 
+			opt1.enter().append("option");	
+			opt1.text(function (z) { return z;});
+			
+		
+			
+		var opt3 = d3.select("#opt3").selectAll("option")
+					.data(num_fea);
+			opt3.exit().remove();
+			opt3.enter().append("option");
+			opt3.text(function(z){return z;});
+		
+			
+			
+			
+		// start template code
+		
+		function remove_empty_bins(source_group) {
+          return {
+              all:function () {                                           //??
+                  return source_group.all().filter(
+                    function(d) { return d.value != 0;});
+              }};
+        } 
+					
+		
+		//define data for each chart
+		var binwidth= +document.getElementById("opt4").value; 
+	    var scatter_x = document.getElementById("opt3").value,
+		    box_x = document.getElementById("opt1").value;
+		
+		
+		var ndx = crossfilter(dataset);
+		
+		var	histDim = ndx.dimension(function(d) { return Math.floor(d["SalePrice"]);}),
+			histrange=d3.extent(dataset,function(d){return +d["SalePrice"];}),    
+            histDim = ndx.dimension(function(d) {
+          // Threshold
+			  var threshold = d["SalePrice"];
+			  if (threshold <= histrange[0]) threshold = histrange[0];
+			  if (threshold >= histrange[1]) threshold = histrange[1] - binwidth;
+			  return binwidth * Math.floor(threshold / binwidth);
+			}),
+			histgroup = histDim.group();
+		
+		var categoryDimension = ndx.dimension(function(d) {return  d[box_x];}),
+			cateGroup     = categoryDimension.group().reduce(
+				function(p,v) {
+					p.push(v.SalePrice);
+					return p;
+				},
+				function(p,v) {
+					p.splice(p.indexOf(v.SalePrice), 1);
+				return p;
+				},
+				function() {
+				return [];
+				});
+		
+		
+			
+		var scatterDim = ndx.dimension(function(d){return [d[scatter_x],d["SalePrice"]];}),
+			scatterGroup = scatterDim.group(),
+			scattergroup1=remove_empty_bins(scatterGroup);
+		
+		//define graph plot
+		histChart
+          .width(500).height(250)
+		  .margins({top: 10, right: 40, bottom: 40, left: 40})
+          .dimension(histDim)
+          .group(histgroup)
+          .yAxisLabel("Frequency")
+          .xAxisLabel("SalePrice")
+          .x(d3.scale.linear().domain(d3.extent(dataset,function(d){return +d["SalePrice"];})))
+          .centerBar(false)
+          .xUnits(dc.units.fp.precision(binwidth))
+          .elasticX(true)
+          .elasticY(true);
+        histChart.xAxis().tickFormat(d3.format("s"));
+        histChart.yAxis().ticks(10);  
+		
+		boxchart
+		  .width(1000)
+		  .height(440)
+		  .margins({top: 0, right: 40, bottom: 40, left: 60})
+		  .dimension(categoryDimension)
+		  .group(cateGroup)
+		  .yAxisLabel("SalePrice")
+          .xAxisLabel(box_x)
+		  .elasticY(true)
+		  .elasticX(true);
+		boxchart.yAxis().tickFormat(d3.format("s"));
+		
+		
+		scatterplot
+          .width(500)
+          .height(250)
+		  .margins({top: 10, right: 40, bottom: 40, left: 50})
+          .x(d3.scale.linear().domain( d3.extent(dataset, function(d){return +d[scatter_x];} ) ))
+          .y(d3.scale.linear().domain( d3.extent(dataset, function(d){return +d["SalePrice"];} ) ))
+//		  .x(d3.scale.linear().domain( [-1+1.1*d3.min(dataset, function(d){ return d[scatter_x];}), 1.1*d3.max(dataset, function(d) { return d[scatter_x]; })]  ))
+//		  .y(d3.scale.linear().domain( [1.1*d3.min(dataset, function(d){ return d["SalePrice"];}), 1.1*d3.max(dataset, function(d) { return d["SalePrice"]; })]  ))
+          .yAxisLabel("SalePrice")
+          .xAxisLabel(scatter_x)
+          .clipPadding(10)
+          .dimension(scatterDim)
+          .excludedOpacity(0.5)
+          .group(scatterGroup)
+           
+        scatterplot.yAxis().tickFormat(d3.format("s"));
+        scatterplot.xAxis().tickFormat(d3.format("s")) ;  
+			
+		show_description(scatter_x, box_x);
+			
+		dc.renderAll(); 
+		
+	  });
+	}
+	
+	function show_description(scatter_x, box_x){		
+		d3.csv("Book1.csv", 
+		function(description){
+		
+			document.getElementById('disopt1').innerHTML = description[0][box_x]; 
+			document.getElementById('disopt3').innerHTML = description[0][scatter_x]; 
+			
+		
+		});
+	}
+	
+	function draw_featureSelection(){
+		var width = 960,
+            height = 500,
+            barHeight = height / 2 - 40;
+
+		var formatNumber = d3.format("s");
+
+		var color = d3.scale.ordinal()
+			.range(["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]);
+		d3.select('#circlebar').selectAll("*").remove();
+		
+		var svg = d3.select('#circlebar').append("svg")
+			.attr("width", width)
+			.attr("height", height)
+		  .append("g")
+			.attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+		
+		d3.csv("featureImportance.csv", function(error, data) {
+
+		  data.sort(function(a,b) { return +b.Score - +a.Score; });
+
+		  var extent = [0, d3.max(data, function(d) { return +d.Score; })];
+		  var barScale = d3.scale.linear()
+			  .domain(extent)
+			  .range([0, barHeight]);
+
+		  var keys = data.map(function(d,i) { return d.Feature; });
+		  var numBars = keys.length;
+
+		  var x = d3.scale.linear()
+			  .domain(extent)
+			  .range([0, -barHeight]);
+
+		  var xAxis = d3.svg.axis()
+			  .scale(x).orient("left")
+			  .ticks(2);
+			  
+		  var circles = svg.selectAll("circle")
+				  .data(x.ticks(2))
+				.enter().append("circle")
+				  .attr("r", function(d) {return barScale(d);})
+				  .style("fill", "none")
+				  .style("stroke", "black")
+				  .style("stroke-dasharray", "2,2")
+				  .style("stroke-width",".5px");
+
+		  var arc = d3.svg.arc()
+			  .startAngle(function(d,i) { return (i * 2 * Math.PI) / numBars; })
+			  .endAngle(function(d,i) { return ((i + 1) * 2 * Math.PI) / numBars; })
+			  .innerRadius(0);
+			  
+		  
+		  var segments = svg.selectAll("path")
+				  .data(data)
+				.enter().append("path")
+				  .each(function(d) { d.outerRadius = 0; })
+				  .style("fill", function (d) { return color(d.Feature); })
+				  .attr("d", arc);
+				  
+				  
+
+		  segments.transition().ease("elastic").duration(1000).delay(function(d,i) {return (25-i)*100;})
+				  .attrTween("d", function(d,index) {
+					var i = d3.interpolate(d.outerRadius, barScale(+d.Score));
+					return function(t) { d.outerRadius = i(t); return arc(d,index); };
+				  });
+				  
+
+		  svg.append("circle")
+			  .attr("r", barHeight)
+			  .classed("outer", true)
+			  .style("fill", "none")
+			  .style("stroke", "black")
+			  .style("stroke-width","1.5px");
+
+		  var lines = svg.selectAll("line")
+			  .data(keys)
+			.enter().append("line")
+			  .attr("y2", -barHeight - 20)
+			  .style("stroke", "black")
+			  .style("stroke-width",".5px")
+			  .attr("transform", function(d, i) { return "rotate(" + (i * 360 / numBars) + ")"; });
+
+		  svg.append("g")
+			.attr("class", "x axis")
+			.call(xAxis);
+
+		  // Labels
+		  var labelRadius = barHeight * 0.72;
+
+		  var labels = svg.append("g")
+			  .classed("labels", true);
+
+		  labels.append("def")
+				.append("path")
+				.attr("id", "label-path")
+				.attr("d", "m0 " + -labelRadius + " a" + labelRadius + " " + labelRadius + " 0 1,1 -0.01 0");
+
+		  labels.selectAll("text")
+				.data(keys)
+			  .enter().append("text")	
+				.attr("transform", function(d, i) {return "translate(" + (labelRadius*(Math.cos(i*2*Math.PI/numBars)-Math.cos(i*2*Math.PI/numBars+0.5*Math.PI))) + "," + (labelRadius*(Math.sin(i*2*Math.PI/numBars)-Math.sin(i*2*Math.PI/numBars+0.5*Math.PI))) + ")rotate(" + (-65) + ")";})
+				
+				.style("text-anchor", "middle")
+				.style("font-weight","bold")
+				.style("fill", function(d, i) {return "#3e3e3e";})
+				.append("textPath")
+				.attr("xlink:href", "#label-path")
+				.attr("startOffset", function(d, i) {return i * 100 / numBars + 50 / numBars + '%';})
+				.text(function(d, i) {return d; });
+				
+		});
+	}
+	//set size and count variable for step 3 visualization
+	var count = 0,
+	    count1 = 0
+		count2 = 0;
+	var width = 960,
+        height = 500,
+		padding = {left:100, right:30, top:20, bottom:100};
+	
+	
+	function draw_ML(){
+			
+		var MLchart = d3.select("#ML_chart")
+		     .append("svg")
+			 .attr("width", width)
+			 .attr("height",height);
+			 
+		var x = d3.scale.linear()
+					.range([0, width - padding.left -padding.right]),
+			y = d3.scale.linear()
+					.range([height -padding.top-padding.bottom, 0]),
+					
+			xAxis = d3.svg.axis()
+						.scale(x)
+						.orient("bottom"),
+						
+			yAxis = d3.svg.axis()
+						.scale(y)
+						.orient("left");
+			 
+					
+		d3.csv("prediction_ridge25.csv", 
+		
+		function(d){
+		  d["Actual"]= +d["Actual"];
+		  d["Prediction"] = +d["Prediction"];
+		  return d;},
+		  
+		function(data){
+		
+		  
+			x.domain(d3.extent(data, function(d){return d.Actual;}));
+			y.domain(d3.extent(data, function(d){return d.Actual;}));
+
+						
+			var ML = MLchart.selectAll("circle")
+			       .data(data)
+				   .enter()
+				   .append("circle")
+				   .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+				   .attr("r", 3.5)
+				   .attr("cx", function(d){return x(30000);})
+				   .attr("cy", function(d){return y(30000);})
+				   .style("fill", "black")
+				   .attr("data-legend", "Ground-truth")
+				   .transition()
+				   .duration(600)
+				   .attr("cx", function(d){return x(d.Actual);})
+				   .attr("cy", function(d){return y(d.Actual);})
+				   ;
+				   
+			MLchart.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(150,50)")
+            .call(d3.legend);
+				         
+					
+			MLchart.append("g")
+					.attr("class", "x axis")
+					.attr("transform","translate(" + padding.left + "," + (height -padding.bottom) + ")")
+					.call(xAxis);
+					
+			MLchart.append("g")
+			        .attr("class", "y axis")
+					.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+					.call(yAxis);
+					
+			MLchart.append("text")   
+					.attr("transform",
+						"translate(" + ((width+padding.left-padding.right)/2) + " ," + 
+								   (height -padding.bottom/1.5) + ")")
+					.text("Price");
+			  
+				// y-axis label	  
+			MLchart.append("text")
+				    .attr("transform", "rotate(-90)")
+				    .attr("y",   -20)
+				    .attr("x",   0-(height-padding.top-padding.bottom)/2-padding.top)  
+				    .attr("dy", "5em")
+				    .text("Sale Price"); 
+		
+		});		
+    }
+	
+		
+		// Update data section (Called from the onclick)
+	function updateData_Ridge() {
+	
+		count +=1;    
+		// Get the data again
+		d3.csv("prediction_ridge25.csv", function(error, data) {
+			data.forEach(function(d) {
+				d.Actual = +d.Actual;
+				d.Prediction = +d.Prediction;
+			});
+			
+			
+			
+			// Scale the range of the data again 
+			var x = d3.scale.linear()
+					.range([0, width - padding.left -padding.right]),
+			y = d3.scale.linear()
+					.range([height -padding.top-padding.bottom, 0]);
+			
+			x.domain(d3.extent(data, function(d) { return d.Actual; }));
+			y.domain(d3.extent(data, function(d) { return d.Actual; }));
+
+		// Select the section we want to apply our changes to
+		var svg = d3.select("#ML_chart").select("svg");
+		var circles = svg.selectAll(".cir");
+		var legend = svg.selectAll(".legend");
+				  
+		if (count ==1){
+		// Make the changes
+			circles.data(data)
+			.enter()
+					.append("circle")
+					.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+					.attr("r", 2)
+					.attr("class","cir")
+					.attr("cx", function(d){return x(d.Actual);})
+				    .attr("cy", function(d){return y(d.Actual);})
+					.transition()
+					.duration(400)
+					.attr("data-legend","Ridge")
+				    .style("fill", "green")
+				   .attr("cy", function(d){return y(d.Prediction);});		   
+				   
+		};
+		
+		if (count ==2) {   
+		    circles.remove();
+			
+			legend.remove();
+			
+		    count = 0;
+		};
+		
+		legend = svg.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(150,50)")
+            .call(d3.legend);
+
+		});
+		
+    }
+	
+	function updateData_SVR() {
+		count1 +=1;
+        
+		// Get the data again
+		d3.csv("prediction_svr25.csv", function(error, data) {
+			data.forEach(function(d) {
+				d.Actual = +d.Actual;
+				d.Prediction = +d.Prediction;
+			});
+			
+			// Scale the range of the data again 
+			var x = d3.scale.linear()
+					.range([0, width - padding.left -padding.right]),
+			y = d3.scale.linear()
+					.range([height -padding.top-padding.bottom, 0]);
+			
+			x.domain(d3.extent(data, function(d) { return d.Actual; }));
+			y.domain(d3.extent(data, function(d) { return d.Actual; }));
+
+			// Select the section we want to apply our changes to
+			var svg = d3.select("#ML_chart").select("svg");
+			 var circles = svg.selectAll(".cir1");
+			 var legend = svg.selectAll(".legend");
+			 
+					   
+			
+			if (count1 ==1){
+			// Make the changes
+				circles.data(data)
+				.enter()
+						.append("circle")
+						.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+						.attr("r", 2)
+						.attr("class","cir1")
+						.attr("cx", function(d){return x(d.Actual);})
+						.attr("cy", function(d){return y(d.Actual);})
+						.attr("data-legend","SVR")
+					   .style("fill", "yellow")
+					.transition()
+					.duration(400)
+					   .attr("cy", function(d){return y(d.Prediction);});
+			
+			};
+			
+			if (count1 ==2) {
+				
+				circles.remove();
+				legend.remove();
+				
+				count1 = 0;
+			};
+			
+			legend = svg.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(150,50)")
+            .call(d3.legend);
+        
+		});	
+    }
+	
+	function updateData_RF() {
+	     count2+=1;
+		// Get the data again
+		d3.csv("prediction_randomforest.csv", function(error, data) {
+			data.forEach(function(d) {
+				d.Actual = +d.Actual;
+				d.Prediction = +d.Prediction;
+			});
+						
+			
+			// Scale the range of the data again 
+			var x = d3.scale.linear()
+					.range([0, width - padding.left -padding.right]),
+			y = d3.scale.linear()
+					.range([height -padding.top-padding.bottom, 0]);
+			
+			x.domain(d3.extent(data, function(d) { return d.Actual; }));
+			y.domain(d3.extent(data, function(d) { return d.Actual; }));
+
+			// Select the section we want to apply our changes to
+			var svg = d3.select("#ML_chart").select("svg");
+			 var circles = svg.selectAll(".cir2");
+			 var legend = svg.selectAll("g.legend");
+					   
+			
+			if (count2 ==1){
+			// Make the changes
+				circles.data(data)
+				.enter()
+						.append("circle")
+						.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+						.attr("r", 2)
+						.attr("class","cir2")
+						.attr("cx", function(d){return x(d.Actual);})
+						.attr("cy", function(d){return y(d.Actual);})
+						.attr("data-legend","Rand Forest")
+					    .style("fill", "red")
+					.transition()
+					.duration(400)				
+					   .attr("cy", function(d){return y(d.Prediction);})
+					   ;
+			
+			};	
+			
+			
+			if (count2 ==2) {
+				legend.remove();
+     			circles.remove();
+						
+				count2 = 0;
+			};
+			console.log(count2);
+			legend = svg.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(150,50)")
+            .call(d3.legend);	
+		});
+		
+    }
+		
+	draw_graphs();
+	draw_featureSelection();
+	draw_ML();
+	
+	
+	</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
